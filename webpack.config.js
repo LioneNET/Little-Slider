@@ -9,6 +9,9 @@ module.exports = {
     //library: "$",
     libraryTarget: "umd",
   },
+  optimization: {
+    minimize: true
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "style.css"
