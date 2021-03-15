@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="dist/style.css">
+    <title>Demo</title>
+  </head>
+  <body>
+    <div class="slider1"></div>
+    <div class="slider2"></div>
+    <div class="slider3"></div>
+    <script src="dist/index_bundle.js"></script>
+    <script>
+      new LittleSlider('.slider1');
+      new LittleSlider('.slider2', {
+        min: -12,
+        max: 12,
+        step: 0.5,
+        value: 0
+      });
+      new LittleSlider('.slider3', {
+        min: 0,
+        max: 11,
+        step: 2,
+        value: 3,
+        onInit: function(){
+          console.log('slider initialization')
+        },
+        onChange: function(value) {
+          console.log('value changed', value)
+        },
+        onSlide: function(event) {
+          console.log('slide on')
+        },
+        onSlideEnd: function(event) {
+          console.log('slide end')
+        },
+        onMouseUp: function(event) {
+          console.log('mouse up')
+        },
+        onMouseDown: function(event) {
+          console.log('mouse down')
+        }
+      })
+    </script>
+  </body>
+</html>
