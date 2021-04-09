@@ -17,17 +17,17 @@
 
 ```html
 <html>
-	<head>
-		<link rel="stylesheet" href="dist/style.css">
-		<title></title>
-	</head>
-	<body>
+  <head>
+    <link rel="stylesheet" href="dist/style.css">
+    <title></title>
+  </head>
+  <body>
 		<div class="slider1"></div>
-    <div class="slider2"></div>
-    <div class="slider3"></div>
+		<div class="slider2"></div>
+		<div class="slider3"></div>
 
 		<script type="text/javascript" src="dist/little-slider.js"></script>
-	</body>
+  </body>
 </html>
 ```
 
