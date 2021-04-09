@@ -1,6 +1,6 @@
 function createSlider(o) {
 	let $element = document.createElement('div')
-	$element.classList.add('little-scale');
+	$element.className = 'little-scale';
 	$element.insertAdjacentHTML('afterbegin',`
 			<div class="little-slider-line"></div>
 			<div class="little-pointer"></div>
