@@ -2,11 +2,13 @@ const path = require("path")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  target: ['es5'],
   entry: path.resolve(__dirname, "src/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "index_bundle.js",
-    //library: "$",
+    filename: "little-slider.js",
+    library: "LittleSlider",
+    libraryExport: 'default',
     libraryTarget: "umd",
   },
   optimization: {

@@ -1,6 +1,6 @@
 function createSlider(o) {
 	let $element = document.createElement('div')
-	$element.classList.add('little-scale');
+	$element.className = 'little-scale';
 	$element.insertAdjacentHTML('afterbegin',`
 			<div class="little-slider-line"></div>
 			<div class="little-pointer"></div>
@@ -22,18 +22,35 @@ export default class LittleSlider {
 		this.$sliderLine = this.$element.querySelector('.little-slider-line')
 		this.$pointer = this.$element.querySelector('.little-pointer')
 		document.querySelector(el).appendChild(this.$element)
-		this.pointerWidth = this.$pointer.offsetWidth
-		this.pointToMiddle = this.pointerWidth/2
-		this.scaleWidth = this.$element.offsetWidth - this.pointerWidth;
 
 		this.init()
 	}
 
 	init(){
 		this.options.onInit && this.options.onInit.call();
-		['mouseDownHandler', 'mouseUpHandler', 'mouseMoveHandler'].forEach( element => this[element] = this[element].bind(this))
+		['mouseDownHandler', 'mouseUpHandler', 'mouseMoveHandler', 
+		'resizeHandler', 'wheelHandler'].forEach( element => this[element] = this[element].bind(this))
 		this.$element.addEventListener("mousedown", this.mouseDownHandler)
+		window.addEventListener('resize', this.resizeHandler)
+		this.$element.addEventListener("wheel", this.wheelHandler)
+		this.calculate();
 		this.setPosition(this.getPositionFromValue(this.value))
+	}
+
+	calculate() {
+		this.pointerWidth = this.$pointer.offsetWidth
+		this.pointToMiddle = this.pointerWidth/2
+		this.scaleWidth = this.$element.offsetWidth - this.pointerWidth;
+		this.setPosition(this.getPositionFromValue(this.value))
+	}
+
+	resizeHandler() {
+		this.calculate();
+	}
+
+	wheelHandler(e) {
+		let step = Math.round(e.deltaY * 0.01) * this.step
+		this.setPosition(this.getPositionFromValue(this.value + step))
 	}
 
 	//при нажатии кнопки мыши
@@ -81,6 +98,7 @@ export default class LittleSlider {
 			}
 			
 		}
+		this.value = value
 		this.$sliderLine.style.width = x + "px";
 		this.$pointer.style.left = x + "px";
 	}
@@ -108,32 +126,3 @@ export default class LittleSlider {
     return ev.pageX - toElement.getBoundingClientRect().left
 	}
 }
-
-/**
- * @callback LittleSlider~onInit
- */
-
- /**
- * @callback LittleSlider~onChange
- * @param {number} currentValue
- */
-
- /**
- * @callback LittleSlider~onSlideEnd
- * @param {number} currentValue
- */
-
-/**
- * @callback LittleSlider~onSlide
- * @param {object} e
- */
-
-/**
- * @callback LittleSlider~onMouseUp
- * @param {object} e
- */
-
-/**
- * @callback RangeSlider~onMouseDown
- * @param {object} e
- */
