@@ -8,11 +8,61 @@
 </head>
 
 <body>
-  <div class="slider1"></div>
-  <div class="slider2"></div>
-  <div class="slider3"></div>
+  <div class="color-place">
+    <div class="show-color"></div>
+    <div class="text-color">#000000</div>
+    <div class="rgb-handlers">
+      <div class="r-slider"></div>
+      <div class="g-slider"></div>
+      <div class="b-slider"></div>
+    </div>
+  </div>
+  <div class="sliders">
+    <div class="slider1"></div>
+    <div class="slider2"></div>
+    <div class="slider3"></div>
+  </div>
+
   <script>
     window.addEventListener('load', function () {
+      var colorBox = document.querySelector('.show-color')
+      var textColor = document.querySelector('.text-color')
+      var colorObject = {red: 0, green: 0, blue: 0}
+      function colorChange(value, color) {
+        colorObject[color] = value.toString(16)
+        var bgColor = '#'+Object.values(colorObject).map(item => item.length > 1 ? item : '0'+item).join('')
+        colorBox.style.backgroundColor = bgColor
+        textColor.innerHTML = bgColor
+      }
+
+      LittleSlider.init('.r-slider', {
+        min: 0,
+        max: 255,
+        step: 1,
+        value: 0,
+        onChange: function(value) {
+          colorChange(value, 'red')
+        }
+      }).show()
+      LittleSlider.init('.g-slider', {
+        min: 0,
+        max: 255,
+        step: 1,
+        value: 0,
+        onChange: function(value) {
+          colorChange(value, 'green')
+        }
+      }).show()
+      LittleSlider.init('.b-slider', {
+        min: 0,
+        max: 255,
+        step: 1,
+        value: 0,
+        onChange: function(value) {
+          colorChange(value, 'blue')
+        }
+      }).show()
+
       LittleSlider.init('.slider1').show();
       LittleSlider.init('.slider2', {
         min: -12,
