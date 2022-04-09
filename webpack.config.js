@@ -1,5 +1,6 @@
 const path = require("path")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWbepackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   target: ['es5'],
@@ -10,11 +11,16 @@ module.exports = {
     library: "LittleSlider",
     libraryExport: 'default',
     libraryTarget: "umd",
+    clean: true
   },
   optimization: {
     minimize: true
   },
   plugins: [
+    new HtmlWbepackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html'
+    }),
     new MiniCssExtractPlugin({
       filename: "style.css"
     })
